@@ -1,6 +1,9 @@
 # API ANAF
 Librarie PHP pentru verificarea contribuabililor care sunt inregistrati conform art. 316 din Codul Fiscal
 
+# Instalare
+composer require itrack/anaf
+
 # Exemplu de folosire
 
 - Initializare clasa
