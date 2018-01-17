@@ -1,6 +1,17 @@
 # API ANAF
 Librarie PHP pentru verificarea contribuabililor care sunt inregistrati conform art. 316 din Codul Fiscal
 
+Data care pot fi obtinute:
+  - Denumire/Adresa companie
+  - Platitor/Neplatitor TVA
+  - Platitor TVA la incasare
+  - Platitor Split TVA
+  - Data inregistrare TVA
+  - Status Societate (Activa/Inactiva)
+  - etc.
+  
+:heart: Daca iti este de folos te rog sa oferi o stea :star:
+  
 # Instalare
 composer require itrack/anaf
 
