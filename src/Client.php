@@ -50,9 +50,13 @@ class Client
             return $this;
         }
 
+        // Normalization
+        $cui = strtolower($cui);
+        $cui = (int)ltrim($cui, "ro");
+
         // Add cui to list
         $this->cuis[] = [
-            "cui" => (int)$cui,
+            "cui" => $cui,
             "data" => $date
         ];
 
