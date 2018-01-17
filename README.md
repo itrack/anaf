@@ -10,8 +10,8 @@ Data care pot fi obtinute:
   - Status Societate (Activa/Inactiva)
   - etc.
   
+:heart: Daca iti este de folos te rog sa oferi o stea :star:
   
-
 # Instalare
 composer require itrack/anaf
 
