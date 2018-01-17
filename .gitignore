@@ -1,0 +1,9 @@
+# General
+.idea
+.DS_Store
+.AppleDouble
+.LSOverride
+.smbdelete*
+
+# Thumbnails
+._*
