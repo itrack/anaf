@@ -52,7 +52,7 @@ class Client
 
         // Add cui to list
         $this->cuis[] = [
-            "cui" => $cui,
+            "cui" => (int)$cui,
             "data" => $date
         ];
 
