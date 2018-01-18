@@ -17,9 +17,9 @@ composer require itrack/anaf
 
 # Exemplu de folosire
 
-- Initializare clasa
+- Initializare librarie
 
-$anaf = new Itrack\Anaf\Client(); <br><br>
+$anaf = new \Itrack\Anaf\Client(); <br><br>
 
 - Pentru a verifica doar un cui urmati foloseste metoda $anaf->addCui(CUI VALOARE INTEGER, "DATA VERIFICARE") conform exemplului de mai jos:
 
