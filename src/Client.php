@@ -51,8 +51,7 @@ class Client
         }
 
         // Normalization
-        $cui = strtolower($cui);
-        $cui = (int)ltrim($cui, "ro");
+        $cui = preg_replace('/\D/', '', $cui);
 
         // Add cui to list
         $this->cuis[] = [
