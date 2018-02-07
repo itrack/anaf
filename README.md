@@ -1,5 +1,5 @@
 # API ANAF
-Librarie PHP pentru verificarea contribuabililor care sunt inregistrati conform art. 316 din Codul Fiscal
+Librarie PHP pentru verificarea gratuita a contribuabililor care sunt inregistrati conform art. 316 din Codul Fiscal
 
 Data care pot fi obtinute:
   - Denumire/Adresa companie
