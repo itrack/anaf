@@ -33,5 +33,5 @@ $anaf->addCui(654321, "2017-11-24"); <br>
 print_r($anaf->getResults());
 
 # Linkuri utile
-https://blog.turma.ro/api-anaf/
+https://blog.turma.ro/api-anaf/ <br>
 https://static.anaf.ro/static/10/Anaf/Informatii_R/documentatie_SW_01112017.txt
