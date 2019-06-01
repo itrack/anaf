@@ -59,6 +59,10 @@ $anaf->addCui($cuis, "2019-05-20");
 $raspuns = $anaf->getResults();
 ```
 
+# Exemplu raspuns
+![Raspuns ANAF](https://github.com/itrack/anaf/blob/master/response.PNG?raw=true)
+
+
 # Limite
 Poti solicita raspuns pentru maxim 500 de CUI-uri simultan cu o rata de 1 request / secunda. 
 
