@@ -2,8 +2,8 @@
 namespace Itrack\Anaf;
 
 /**
- * Implementare API V3 ANAF
- * https://webservicesp.anaf.ro/PlatitorTvaRest/api/v3/
+ * Implementare API V4 ANAF
+ * https://webservicesp.anaf.ro/PlatitorTvaRest/api/v4/
  */
 class Client
 {
@@ -15,7 +15,7 @@ class Client
     /**
      * @var string
      */
-    protected $apiUri = 'https://webservicesp.anaf.ro/PlatitorTvaRest/api/v3/ws/tva';
+    protected $apiUri = 'https://webservicesp.anaf.ro/PlatitorTvaRest/api/v4/ws/tva';
 
     /**
      * CUI List
@@ -25,51 +25,77 @@ class Client
     protected $cuis = [];
 
     /**
-     * @var array
-     */
-    protected $errors = [];
-
-    /**
-     * Add cui to list
+     * Add more or one cui to list
      *
-     * @param $cui
+     * @param $fiscals
      * @param null $date
      * @return $this
      */
-    public function addCui($cui, $date = null)
+    public function addCui($fiscals, $date = null)
     {
-
         // If not have set date return today
         if(is_null($date)) {
             $date = date('Y-m-d');
         }
-
-        // Limit maxim numbers of cuis
-        if(count($this->cuis) >= self::ANAF_CUI_LIMIT) {
-            $this->errors = "You have exceeded the large number of cui's allowed!";
-            return $this;
+        
+        if(!is_array($fiscals)) {
+            $fiscals = [$fiscals];
         }
 
-        // Normalization
-        $cui = preg_replace('/\D/', '', $cui);
+        foreach($fiscals as $cui) {
+            // Keep only numbers from CUI
+            $cui = preg_replace('/\D/', '', $cui);
 
-        // Add cui to list
-        $this->cuis[] = [
-            "cui" => $cui,
-            "data" => $date
-        ];
+            // Add cui to list
+            $this->cuis[] = [
+                "cui" => $cui,
+                "data" => $date
+            ];
+        }
 
         return $this;
     }
 
-
     /**
      * Get results of request
      *
-     * @return bool|object
+     * @return array
      */
     public function getResults()
     {
+        $results = $this->callApi();
+        foreach($results as $company) {
+            $company->adresa = $this->parseAddress($company->adresa);
+        }
+
+        return $results;
+    }
+
+    /**
+     * Get first result
+     *
+     * @return object
+     */
+    public function getOneResult()
+    {
+        $company = $this->callApi()[0];
+        $company->adresa = $this->parseAddress($company->adresa);
+
+        return $company;
+    }
+    
+    /**
+     * Call ANAF API
+     *
+     * @return array
+     */
+    private function callApi()
+    {
+        // Limit maxim numbers of cuis
+        if(count($this->cuis) >= self::ANAF_CUI_LIMIT) {
+            throw new Exceptions\LimitExceeded('Poti verifica simultam pana la 500 de CUI-uri.');
+        }
+
         // Make request
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -90,8 +116,7 @@ class Client
 
         // Check http code
         if (!isset($info['http_code']) || $info['http_code'] !== 200) {
-            $this->errors = "Response status: {$info['http_code']} | Response body: {$response}";
-            return false;
+            throw new Exceptions\ResponseFailed("Response status: {$info['http_code']} | Response body: {$response}");
         }
 
         // Get items
@@ -99,36 +124,58 @@ class Client
 
         // Check if have json because ANAF return errors in plain text
         if(json_last_error() !== JSON_ERROR_NONE) {
-            $this->errors = "Json parse error | Response body: {$response}";
-            return false;
+            throw new Exceptions\ResponseFailed("Json parse error | Response body: {$response}");
         }
 
         // Check success stats
         if ("SUCCESS" !== $items->message || 200 !== $items->cod) {
-            $this->errors = "Response message: {$items->message} | Response body: {$response}";
-            return false;
-        }
-
-        // Return first item if don't more items
-        if(count($items->found) == 1) {
-            return $items->found[0];
+            throw new Exceptions\RequestFailed("Response message: {$items->message} | Response body: {$response}");
         }
 
         return $items->found;
     }
 
     /**
-     * Return errors if exist of false if all is OK
+     * Parse company address
      *
-     * @return array|bool
+     * @return object
      */
-    public function getErrors()
+    private function parseAddress($raw)
     {
-        if(empty($this->errors)) {
-            return false;
+        // Check if raw is empty
+        if(empty($raw)) {
+            return $raw;
         }
 
-        return $this->errors;
-    }
+        // Normal case from all uppercase
+        $rawText = mb_convert_case($raw, MB_CASE_TITLE, 'UTF-8');
 
+        // Parse address
+        $list = array_map('trim', explode(",", $rawText, 5));
+        list($judet, $localitate, $strada, $numar, $altele) = array_pad($list, 5, '');
+
+        // Parse county
+        $judet = trim(str_replace('Jud.', '', $judet));
+
+        // Parse city
+        $localitate = trim(str_replace(['Mun.', 'Orş.'], ['', 'Oraş'], $localitate));
+
+        // Parse street
+        $strada = trim(str_replace('Str.', '', $strada));
+
+        // Parse number
+        $numar = trim(str_replace('Nr.', '', $numar));
+
+        // New object for address
+        $address = new \stdClass;
+
+        $address->raw = $raw;
+        $address->judet = $judet;
+        $address->localitate = $localitate;
+        $address->strada = $strada;
+        $address->numar = $numar;
+        $address->altele = $altele;
+
+        return $address;
+    }
 }

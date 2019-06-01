@@ -1,6 +1,7 @@
 {
     "name": "itrack/anaf",
     "type": "library",
+    "version": "2.0.0",
     "description": "API ANAF pentru verificarea contribuabililor care sunt inregistrati conform art. 316 din Codul Fiscal",
     "authors": [{
             "name": "Alex Stoica",

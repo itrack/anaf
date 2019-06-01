@@ -1,14 +1,15 @@
 # API ANAF
 Librarie PHP pentru verificarea gratuita a contribuabililor care sunt inregistrati conform art. 316 din Codul Fiscal
 
-Data care pot fi obtinute:
+Date care pot fi obtinute:
   - Denumire/Adresa companie
   - Platitor/Neplatitor TVA
   - Platitor TVA la incasare
   - Platitor Split TVA
+  - IBAN Split TVA
   - Data inregistrare TVA
   - Status Societate (Activa/Inactiva)
-  - etc.
+  - Data radiere
   
 :heart: Daca iti este de folos te rog sa oferi o stea :star:
   
@@ -19,18 +20,56 @@ composer require itrack/anaf
 
 - Initializare librarie
 
-$anaf = new \Itrack\Anaf\Client(); <br><br>
+```php
+$anaf = new \Itrack\Anaf\Client(); 
+```
 
-- Pentru a verifica doar un cui urmati foloseste metoda $anaf->addCui(CUI VALOARE INTEGER, "DATA VERIFICARE") conform exemplului de mai jos:
+### Pentru a verifica doar un CUI foloseste metoda 
 
-$anaf->addCui(123456, "2017-12-31"); <br>
-print_r($anaf->getResults());<br><br>
+```php
+$cui = "123456";
+$dataVerificare = "YYYY-MM-DD";
+$anaf->addCui($cui, $dataVerificare);
+```
 
-- Pentru a verifica mai multe CUI-uri in acelasi timp foloseste metoda $anaf->addCui(CUI VALOARE INTEGER, "DATA VERIFICARE") de mai multe ori:
 
-$anaf->addCui(123456, "2017-12-31"); <br>
-$anaf->addCui(654321, "2017-11-24"); <br>
-print_r($anaf->getResults());
+#### Conform exemplului de mai jos:
+
+```php
+$cui = "123456";
+$dataVerificare = "2019-05-20";
+$anaf->addCui($cui, $dataVerificare);
+$raspuns = $anaf->getOneResult();
+```
+
+### Pentru a verifica mai multe CUI-uri in acelasi timp foloseste urmeaza exemplul de mai jos:
+
+```php
+$anaf->addCui("123456", "2019-05-20");
+$anaf->addCui("RO654321"); // Daca data nu este setata, valoarea default va fi data de azi
+$raspuns = $anaf->getResults();
+
+// SAU
+
+$cuis = [
+  "123456",
+  "RO6543221"
+];
+$anaf->addCui($cuis, "2019-05-20");
+$raspuns = $anaf->getResults();
+```
+
+# Limite
+Poti solicita raspuns pentru maxim 500 de CUI-uri simultan cu o rata de 1 request / secunda. 
+
+# Tratarea exceptiilor
+Din versiunea 2.0.0 am adaugat exceptii pentru tratarea erorilor, pentru a nu afecta mediile de productie te rog sa tratezi aceste exceptii prin try -> catch
+
+Exceptii:
+
+* Itrack\Anaf\Exceptions\LimitExceeded - Ai depasit limita de 500 de CUI-uri / request;
+* Itrack\Anaf\Exceptions\ResponseFailed - Raspunsul primit de la ANAF nu este in format JSON, exceptia returneaza body-ul raspunsului pentru a fi verificat manual;
+* Itrack\Anaf\Exceptions\RequestFailed - Raspunsul primit de la ANAF nu are status de succes, verifica manual raspunsul primit in exceptie.
 
 # Linkuri utile
 https://blog.turma.ro/api-anaf/ <br>
