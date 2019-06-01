@@ -77,4 +77,4 @@ Exceptii:
 
 # Linkuri utile
 https://blog.turma.ro/api-anaf/ <br>
-https://static.anaf.ro/static/10/Anaf/Informatii_R/documentatie_SW_01112017.txt
+https://webservicesp.anaf.ro/PlatitorTvaRest/api/v4/
