@@ -1,32 +1,26 @@
 <?php
 namespace Itrack\Anaf;
 
+use stdClass;
+
 /**
  * Implementare API V4 ANAF
  * https://webservicesp.anaf.ro/PlatitorTvaRest/api/v4/
+ * @package Itrack\Anaf
  */
 class Client
 {
-    /**
-     * ANAF limit one times cui's
-     */
+    /** @var string API URL v4 */
+    const apiURL = 'https://webservicesp.anaf.ro/PlatitorTvaRest/api/v4/ws/tva';
+
+    /** @var int ANAF limit one times cui's */
     const ANAF_CUI_LIMIT = 500;
 
-    /**
-     * @var string
-     */
-    protected $apiUri = 'https://webservicesp.anaf.ro/PlatitorTvaRest/api/v4/ws/tva';
-
-    /**
-     * CUI List
-     *
-     * @var array
-     */
+    /** @var array CUI List */
     protected $cuis = [];
 
     /**
      * Add more or one cui to list
-     *
      * @param $fiscals
      * @param null $date
      * @return $this
@@ -58,8 +52,10 @@ class Client
 
     /**
      * Get results of request
-     *
      * @return array
+     * @throws Exceptions\LimitExceeded
+     * @throws Exceptions\RequestFailed
+     * @throws Exceptions\ResponseFailed
      */
     public function getResults()
     {
@@ -73,8 +69,10 @@ class Client
 
     /**
      * Get first result
-     *
-     * @return object
+     * @return mixed
+     * @throws Exceptions\LimitExceeded
+     * @throws Exceptions\RequestFailed
+     * @throws Exceptions\ResponseFailed
      */
     public function getOneResult()
     {
@@ -83,11 +81,13 @@ class Client
 
         return $company;
     }
-    
+
     /**
      * Call ANAF API
-     *
-     * @return array
+     * @return mixed
+     * @throws Exceptions\LimitExceeded
+     * @throws Exceptions\RequestFailed
+     * @throws Exceptions\ResponseFailed
      */
     private function callApi()
     {
@@ -99,7 +99,7 @@ class Client
         // Make request
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $this->apiUri,
+            CURLOPT_URL => self::apiURL,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT => 10,
             CURLOPT_CUSTOMREQUEST => "POST",
@@ -137,8 +137,8 @@ class Client
 
     /**
      * Parse company address
-     *
-     * @return object
+     * @param $raw
+     * @return stdClass
      */
     private function parseAddress($raw)
     {
@@ -167,7 +167,7 @@ class Client
         $numar = trim(str_replace('Nr.', '', $numar));
 
         // New object for address
-        $address = new \stdClass;
+        $address = new stdClass;
 
         $address->raw = $raw;
         $address->judet = $judet;

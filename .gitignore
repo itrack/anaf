@@ -7,3 +7,9 @@
 
 # Thumbnails
 ._*
+
+# Test files
+composer.lock
+phpunit.xml
+vendor
+.phpunit.result.cache
