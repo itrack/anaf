@@ -71,6 +71,12 @@ $raspuns = $anaf->getResults();
 # Limite
 Poti solicita raspuns pentru maxim 500 de CUI-uri simultan cu o rata de 1 request / secunda. 
 
+# Requirements
+* PHP >= 5.5
+* Ext-Curl
+* Ext-Json
+* Ext-Mbstring
+
 # Tratarea exceptiilor
 Din versiunea 2.0.0 am adaugat exceptii pentru tratarea erorilor, pentru a nu afecta mediile de productie te rog sa tratezi aceste exceptii prin try -> catch
 
