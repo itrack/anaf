@@ -19,7 +19,10 @@ Date care pot fi obtinute:
 :heart: Daca iti este de folos te rog sa oferi o stea :star:
   
 # Instalare
+
+```shell
 composer require itrack/anaf
+```
 
 # Exemplu de folosire
 
