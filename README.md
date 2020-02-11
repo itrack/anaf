@@ -89,6 +89,9 @@ Exceptii:
 * Itrack\Anaf\Exceptions\ResponseFailed - Raspunsul primit de la ANAF nu este in format JSON, exceptia returneaza body-ul raspunsului pentru a fi verificat manual;
 * Itrack\Anaf\Exceptions\RequestFailed - Raspunsul primit de la ANAF nu are status de succes, verifica manual raspunsul primit in exceptie.
 
+# Contribuitori
+[![Contribuitori](https://contributors-img.firebaseapp.com/image?repo=itrack/anaf)](https://github.com/itrack/anaf/graphs/contributors)
+
 # Linkuri utile
 https://blog.turma.ro/api-anaf/ <br>
 https://webservicesp.anaf.ro/PlatitorTvaRest/api/v4/
