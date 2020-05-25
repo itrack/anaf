@@ -10,7 +10,7 @@ Date care pot fi obtinute:
   - Denumire/Adresa companie
   - Platitor/Neplatitor TVA
   - Platitor TVA la incasare
-  - Platitor Split TVA
+  - ~~Platitor Split TVA~~ **OUG 23/2017 privind plata defalcată a TVA a fost abrogata incepand cu 1 februarie 2020**
   - IBAN Split TVA
   - Data inregistrare TVA
   - Status Societate (Activa/Inactiva)
