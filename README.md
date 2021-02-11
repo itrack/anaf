@@ -8,6 +8,8 @@ Librarie PHP pentru verificarea gratuita a contribuabililor care sunt inregistra
 
 Date care pot fi obtinute:
   - Denumire/Adresa companie
+  - Numar Registrul Comertului
+  - Numar de telefon
   - Platitor/Neplatitor TVA
   - Platitor TVA la incasare
   - ~~Platitor Split TVA~~ **OUG 23/2017 privind plata defalcată a TVA a fost abrogata incepand cu 1 februarie 2020**
@@ -35,63 +37,89 @@ $anaf = new \Itrack\Anaf\Client();
 ### Pentru a verifica doar un CUI foloseste metoda 
 
 ```php
-$cui = "123456";
+$cif = "123456";
 $dataVerificare = "YYYY-MM-DD";
-$anaf->addCui($cui, $dataVerificare);
+$anaf->addCif($cif, $dataVerificare);
 ```
 
 
 #### Conform exemplului de mai jos:
 
 ```php
-$cui = "123456";
+$cif = "123456";
 $dataVerificare = "2019-05-20";
-$anaf->addCui($cui, $dataVerificare);
-$raspuns = $anaf->getOneResult();
+$anaf->addCif($cif, $dataVerificare);
+$company = $anaf->first();
+
+// Metode disponibile
+echo $company->getName();
+echo $company->getCIF();
+echo $company->getRegCom();
+echo $company->getPhone();
+
+echo $company->getFullAddress();
+echo $company->getAddress()->getCounty();
+echo $company->getAddress()->getCounty();
+echo $company->getAddress()->getStreet();
+echo $company->getAddress()->getStreetNumber();
+echo $company->getAddress()->getOthers();
+
+echo $company->getTVA()->hasTVA();
+echo $company->getTVA()->getTVAEnrollDate();
+echo $company->getTVA()->getTVAEndDate();
+
+echo $company->getTVA()->hasTVACollection();
+echo $company->getTVA()->getTVACollectionEnrollDate();
+echo $company->getTVA()->getTVACollectionEndDate();
+
+echo $company->getTVA()->hasTVASplit();
+echo $company->getTVA()->getTVASplitEnrollDate();
+echo $company->getTVA()->getTVASplitEndDate();
+echo $company->getTVA()->getTVASplitIBAN();
+
+echo $company->getReactivationDate();
+echo $company->getInactivationDate();
+echo $company->getDeletionDate();
+echo $company->isActive();
 ```
 
 ### Pentru a verifica mai multe CUI-uri in acelasi timp foloseste urmeaza exemplul de mai jos:
 
 ```php
-$anaf->addCui("123456", "2019-05-20");
-$anaf->addCui("RO654321"); // Daca data nu este setata, valoarea default va fi data de azi
-$raspuns = $anaf->getResults();
+$anaf->addCif("123456", "2019-05-20");
+$anaf->addCif("RO654321"); // Daca data nu este setata, valoarea default va fi data de azi
+$raspuns = $anaf->get();
 
 // SAU
 
-$cuis = [
+$cifs = [
   "123456",
   "RO6543221"
 ];
-$anaf->addCui($cuis, "2019-05-20");
-$raspuns = $anaf->getResults();
+$anaf->addCif($cuis, "2019-05-20");
+$raspuns = $anaf->get();
 ```
-
-# Exemplu raspuns
-![Raspuns ANAF](https://github.com/itrack/anaf/blob/master/response.PNG?raw=true)
-
 
 # Limite
 Poti solicita raspuns pentru maxim 500 de CUI-uri simultan cu o rata de 1 request / secunda. 
 
 # Requirements
-* PHP >= 5.5
+* PHP >= 7.1
 * Ext-Curl
 * Ext-Json
 * Ext-Mbstring
 
-# Tratarea exceptiilor
-Din versiunea 2.0.0 am adaugat exceptii pentru tratarea erorilor, pentru a nu afecta mediile de productie te rog sa tratezi aceste exceptii prin try -> catch
-
-Exceptii:
+# Exceptii:
 
 * Itrack\Anaf\Exceptions\LimitExceeded - Ai depasit limita de 500 de CUI-uri / request;
 * Itrack\Anaf\Exceptions\ResponseFailed - Raspunsul primit de la ANAF nu este in format JSON, exceptia returneaza body-ul raspunsului pentru a fi verificat manual;
 * Itrack\Anaf\Exceptions\RequestFailed - Raspunsul primit de la ANAF nu are status de succes, verifica manual raspunsul primit in exceptie.
 
+# Upgrade de la 2 la 3
+Versiunea 2 nu este compatibila cu versiunea 3, daca aveti o implementare vechie, trebuie refacuta pentru a fi compatibila.
+
 # Contribuitori
 [![Contribuitori](https://contributors-img.firebaseapp.com/image?repo=itrack/anaf)](https://github.com/itrack/anaf/graphs/contributors)
 
 # Linkuri utile
-https://blog.turma.ro/api-anaf/ <br>
-https://webservicesp.anaf.ro/PlatitorTvaRest/api/v4/
+https://webservicesp.anaf.ro/PlatitorTvaRest/api/v5/
