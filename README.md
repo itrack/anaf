@@ -12,7 +12,7 @@ Date care pot fi obtinute:
   - Numar de telefon
   - Platitor/Neplatitor TVA
   - Platitor TVA la incasare
-  - ~~Platitor Split TVA pana la 1 februarie 2020~~ **OUG 23/2017 privind plata defalcată a TVA a fost abrogata incepand cu 1 februarie 2020**
+  - Platitor Split TVA pana la 1 februarie 2020 (**OUG 23/2017 privind plata defalcată a TVA a fost abrogata incepand cu 1 februarie 2020**)
   - IBAN Split TVA
   - Data inregistrare TVA
   - Status Societate (Activa/Inactiva)
