@@ -96,7 +96,7 @@ $cifs = [
   "123456",
   "RO6543221"
 ];
-$anaf->addCif($cuis, "2019-05-20");
+$anaf->addCif($cifs, "2019-05-20");
 $raspuns = $anaf->get();
 ```
 
