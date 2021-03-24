@@ -22,7 +22,7 @@ class Company
      */
     public function getCIF(): string
     {
-        return $this->parser->getData()['cui'];
+        return $this->parser->checkIndex($this->parser->getData(), 'cui');
     }
 
     /**
@@ -30,7 +30,7 @@ class Company
      */
     public function getRegCom(): string
     {
-        return $this->parser->getData()['nrRegCom'];
+        return $this->parser->checkIndex($this->parser->getData(), 'nrRegCom');
     }
 
     /**
@@ -38,7 +38,7 @@ class Company
      */
     public function getName(): string
     {
-        return $this->parser->getData()['denumire'];
+        return $this->parser->checkIndex($this->parser->getData(), 'denumire');
     }
 
     /**
@@ -46,7 +46,7 @@ class Company
      */
     public function getPhone(): string
     {
-        return $this->parser->getData()['telefon'];
+        return $this->parser->checkIndex($this->parser->getData(), 'telefon');
     }
 
     /**
@@ -54,7 +54,7 @@ class Company
      */
     public function getFullAddress(): string
     {
-        return $this->parser->getData()['adresa'];
+        return $this->parser->checkIndex($this->parser->getData(), 'adresa');
     }
 
     /**
@@ -107,5 +107,13 @@ class Company
     public function getAddress(): CompanyAddress
     {
         return new CompanyAddress($this->parser);
+    }
+
+    /**
+     * @return array
+     */
+    public function getData(): array
+    {
+        return $this->parser->getData();
     }
 }

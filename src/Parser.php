@@ -16,6 +16,19 @@ class Parser
     }
 
     /**
+     * @param $data
+     * @param $key
+     * @return string
+     */
+    public function checkIndex($data, $key): string
+    {
+        if(array_key_exists($key, $data)){
+            return $data[$key];
+        }
+        return '';
+    }
+
+    /**
      * @return array
      */
     public function getAddress(): array
