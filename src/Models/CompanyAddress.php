@@ -22,7 +22,7 @@ class CompanyAddress
      */
     public function getCounty(): string
     {
-        return $this->parser->getAddress()['county'];
+        return $this->parser->checkIndex($this->parser->getAddress(), 'county');
     }
 
     /**
@@ -30,7 +30,7 @@ class CompanyAddress
      */
     public function getCity(): string
     {
-        return $this->parser->getAddress()['city'];
+        return $this->parser->checkIndex($this->parser->getAddress(), 'city');
     }
 
     /**
@@ -38,7 +38,7 @@ class CompanyAddress
      */
     public function getStreet(): string
     {
-        return $this->parser->getAddress()['street'];
+        return $this->parser->checkIndex($this->parser->getAddress(), 'street');
     }
 
     /**
@@ -46,7 +46,15 @@ class CompanyAddress
      */
     public function getStreetNumber(): string
     {
-        return $this->parser->getAddress()['streetNumber'];
+        return $this->parser->checkIndex($this->parser->getAddress(), 'streetNumber');
+    }
+
+    /**
+     * @return string
+     */
+    public function getZipCode(): string
+    {
+        return $this->parser->checkIndex($this->parser->getData(), 'codPostal');
     }
 
     /**
@@ -54,6 +62,6 @@ class CompanyAddress
      */
     public function getOthers(): string
     {
-        return $this->parser->getAddress()['others'];
+        return $this->parser->checkIndex($this->parser->getAddress(), 'others');
     }
 }
