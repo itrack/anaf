@@ -4,7 +4,7 @@ namespace Itrack\Anaf;
 class Http
 {
     /** @var string API URL for v5 */
-    private const apiURL = 'https://webservicesp.anaf.ro/PlatitorTvaRest/api/v5/ws/tva';
+    private const apiURL = 'https://webservicesp.anaf.ro/PlatitorTvaRest/api/v6/ws/tva';
 
     /** @var int Limit for one time call */
     public const CIF_LIMIT = 500;
