@@ -3,10 +3,11 @@ Librarie PHP pentru verificarea gratuita a contribuabililor care sunt inregistra
 
 [![Latest Version](http://img.shields.io/packagist/v/itrack/anaf.svg)](https://packagist.org/packages/itrack/anaf)
 [![Build Status](https://travis-ci.com/itrack/anaf.svg?branch=master)](https://app.travis-ci.com/itrack/anaf)
+[![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://vshymanskyy.github.io/StandWithUkraine/)
 
 -----
 
-#StandWithUkraine 🇺🇦
+[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://vshymanskyy.github.io/StandWithUkraine/)
 
 -----
 
