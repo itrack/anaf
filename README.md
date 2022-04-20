@@ -6,6 +6,10 @@ Librarie PHP pentru verificarea gratuita a contribuabililor care sunt inregistra
 
 -----
 
+#StandWithUkraine 🇺🇦
+
+-----
+
 Date care pot fi obtinute:
   - Denumire/Adresa companie
   - Numar Registrul Comertului
