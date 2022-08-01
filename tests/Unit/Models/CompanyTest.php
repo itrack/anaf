@@ -24,6 +24,7 @@ class CompanyTest extends TestCase
             'city' => 'Sector 1',
             'street' => 'Şos. Bucureşti-Ploieşti',
             'streetNumber' => '172-176',
+            'postalCode' => '057003'
         ];
 
         $parset->expects($this->any())
@@ -37,9 +38,6 @@ class CompanyTest extends TestCase
                 'denumire' => 'Test',
                 'telefon' => 07676000000,
             ]));
-        $parset->expects($this->any())
-            ->method("getPostalCode")
-            ->will($this->returnValue("057003"));
 
         $company = new Company($parset);
         $this->assertEquals(123456, $company->getCIF());

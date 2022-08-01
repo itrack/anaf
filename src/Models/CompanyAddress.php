@@ -52,9 +52,9 @@ class CompanyAddress
     /**
      * @return string
      */
-    public function getPostalCode()
+    public function getPostalCode(): ?string
     {
-        return $this->parser->getPostalCode();
+        return $this->parser->getAddress()['postalCode'];
     }
 
     /**
