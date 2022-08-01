@@ -63,4 +63,12 @@ class Parser
     {
         return $this->data;
     }
+
+    /**
+     * @return string
+     */
+    public function getPostalCode()
+    {
+        return $this->data['codPostal'];
+    }
 }

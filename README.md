@@ -67,6 +67,7 @@ echo $company->getAddress()->getCity();
 echo $company->getAddress()->getCounty();
 echo $company->getAddress()->getStreet();
 echo $company->getAddress()->getStreetNumber();
+echo $company->getAddress()->getPostalCode();
 echo $company->getAddress()->getOthers();
 
 echo $company->getTVA()->hasTVA();

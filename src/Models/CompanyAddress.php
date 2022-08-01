@@ -52,6 +52,14 @@ class CompanyAddress
     /**
      * @return string
      */
+    public function getPostalCode()
+    {
+        return $this->parser->getPostalCode();
+    }
+
+    /**
+     * @return string
+     */
     public function getOthers(): string
     {
         return $this->parser->getAddress()['others'];
