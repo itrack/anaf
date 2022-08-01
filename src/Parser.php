@@ -5,6 +5,7 @@ class Parser
 {
     /** @var array */
     private $data = [];
+    private $address = [];
 
     /**
      * Parser constructor.
@@ -13,6 +14,33 @@ class Parser
     public function __construct(array $data)
     {
         $this->data = $data;
+
+        if (!empty($data['adresa'])) {
+            // Normal case from all uppercase
+            $rawText = mb_convert_case($data['adresa'], MB_CASE_TITLE, 'UTF-8');
+
+            // Parse address
+            $list = array_map('trim', explode(",", $rawText, 5));
+            list($county, $city, $street, $number, $other) = array_pad($list, 5, '');
+
+            // Parse county
+            $this->address['county'] = trim(str_replace('Jud.', '', $county));
+
+            // Parse city
+            $this->address['city'] = trim(str_replace(['Mun.', 'Orş.'], ['', 'Oraş'], $city));
+
+            // Parse street
+            $this->address['street'] = trim(str_replace('Str.', '', $street));
+
+            // Parse street number
+            $this->address['streetNumber'] = trim(str_replace('Nr.', '', $number));
+
+            // Parse others
+            $this->address['others'] = trim($other);
+        }
+
+        // Parse postal code
+        $this->address['postalCode'] = $data['codPostal'] ?? NULL;
     }
 
     /**
@@ -20,31 +48,7 @@ class Parser
      */
     public function getAddress(): array
     {
-        $address = [];
-
-        // Normal case from all uppercase
-        $rawText = mb_convert_case($this->data['adresa'], MB_CASE_TITLE, 'UTF-8');
-
-        // Parse address
-        $list = array_map('trim', explode(",", $rawText, 5));
-        list($county, $city, $street, $number, $other) = array_pad($list, 5, '');
-
-        // Parse county
-        $address['county'] = trim(str_replace('Jud.', '', $county));
-
-        // Parse city
-        $address['city'] = trim(str_replace(['Mun.', 'Orş.'], ['', 'Oraş'], $city));
-
-        // Parse street
-        $address['street'] = trim(str_replace('Str.', '', $street));
-
-        // Parse street number
-        $address['streetNumber'] = trim(str_replace('Nr.', '', $number));
-
-        // Parse others
-        $address['others'] = trim($other);
-
-        return $address;
+        return $this->address;
     }
 
     /**
@@ -62,13 +66,5 @@ class Parser
     public function getData(): array
     {
         return $this->data;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPostalCode()
-    {
-        return $this->data['codPostal'];
     }
 }
