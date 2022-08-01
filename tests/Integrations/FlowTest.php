@@ -47,5 +47,6 @@ class FlowTest extends TestCase
         $this->assertEquals("Oraş Voluntari", $results->getAddress()->getCity());
         $this->assertEquals("Şos. Bucureşti Nord", $results->getAddress()->getStreet());
         $this->assertEquals("15-23", $results->getAddress()->getStreetNumber());
+        $this->assertEquals("057003", $results->getAddress()->getPostalCode());
     }
 }

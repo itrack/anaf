@@ -16,6 +16,7 @@ foreach ($companies as $company) {
     echo $company->getAddress()->getCounty();
     echo $company->getAddress()->getStreet();
     echo $company->getAddress()->getStreetNumber();
+    echo $company->getAddress()->getPostalCode();
 
     // ... etc
 }
