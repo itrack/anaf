@@ -33,9 +33,11 @@ class CompanyTest extends TestCase
         $parset->expects($this->any())
             ->method('getData')
             ->will($this->returnValue([
-                'cui' => 123456,
-                'denumire' => 'Test',
-                'telefon' => 07676000000,
+                'date_generale' => [
+                    'cui' => 123456,
+                    'denumire' => 'Test',
+                    'telefon' => 07676000000,
+                ]
             ]));
         $parset->expects($this->any())
             ->method("getPostalCode")
