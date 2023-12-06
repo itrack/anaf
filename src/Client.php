@@ -5,8 +5,8 @@ use Itrack\Anaf\Models\Company;
 use stdClass;
 
 /**
- * Implementare API ANAF V6
- * https://webservicesp.anaf.ro/PlatitorTvaRest/api/v6/
+ * Implementare API ANAF V8
+ * https://webservicesp.anaf.ro/PlatitorTvaRest/api/v8/
  * @package Itrack\Anaf
  */
 class Client

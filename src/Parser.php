@@ -23,7 +23,7 @@ class Parser
         $address = [];
 
         // Normal case from all uppercase
-        $rawText = mb_convert_case($this->data['adresa'], MB_CASE_TITLE, 'UTF-8');
+        $rawText = mb_convert_case($this->data['date_generale']['adresa'], MB_CASE_TITLE, 'UTF-8');
 
         // Parse address
         $list = array_map('trim', explode(",", $rawText, 5));
@@ -52,8 +52,7 @@ class Parser
      */
     public function getRegisterDate()
     {
-        $rawDate = trim(str_replace('INREGISTRAT din data ', '', $this->data['stare_inregistrare']));
-        return date("Y-m-d", strtotime($rawDate));
+        return $this->data['date_generale']['data_inregistrare'] ?? false;
     }
 
     /**
@@ -67,8 +66,8 @@ class Parser
     /**
      * @return string
      */
-    public function getPostalCode()
+    public function getPostalCode(): string
     {
-        return $this->data['codPostal'];
+        return $this->data['date_generale']['codPostal'] ?? '';
     }
 }

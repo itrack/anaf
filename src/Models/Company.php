@@ -22,7 +22,7 @@ class Company
      */
     public function getCIF(): string
     {
-        return $this->parser->getData()['cui'] ?? '';
+        return $this->parser->getData()['date_generale']['cui'] ?? '';
     }
 
     /**
@@ -30,7 +30,7 @@ class Company
      */
     public function getRegCom(): string
     {
-        return $this->parser->getData()['nrRegCom'] ?? '';
+        return $this->parser->getData()['date_generale']['nrRegCom'] ?? '';
     }
 
     /**
@@ -38,7 +38,7 @@ class Company
      */
     public function getName(): string
     {
-        return $this->parser->getData()['denumire'] ?? '';
+        return $this->parser->getData()['date_generale']['denumire'] ?? '';
     }
 
     /**
@@ -46,7 +46,7 @@ class Company
      */
     public function getPhone(): string
     {
-        return $this->parser->getData()['telefon'] ?? '';
+        return $this->parser->getData()['date_generale']['telefon'] ?? '';
     }
 
     /**
@@ -54,7 +54,7 @@ class Company
      */
     public function getFullAddress(): string
     {
-        return $this->parser->getData()['adresa'] ?? '';
+        return $this->parser->getData()['date_generale']['adresa'] ?? '';
     }
 
     /**
@@ -62,11 +62,11 @@ class Company
      */
     public function isActive(): bool
     {
-        if (empty($this->parser->getData()['statusInactivi']) || !is_bool($this->parser->getData()['statusInactivi'])) {
+        if (empty($this->parser->getData()['stare_inactiv']['statusInactivi'] ?? null) || !is_bool($this->parser->getData()['stare_inactiv']['statusInactivi'] ?? null)) {
             return false;
         }
 
-        return !$this->parser->getData()['statusInactivi'];
+        return !$this->parser->getData()['stare_inactiv']['statusInactivi'] ?? false;
     }
 
     /**
@@ -74,7 +74,7 @@ class Company
      */
     public function getInactivationDate(): string
     {
-        return $this->parser->getData()['dataInactivare'] ?? '';
+        return $this->parser->getData()['stare_inactiv']['dataInactivare'] ?? '';
     }
 
     /**
@@ -82,7 +82,7 @@ class Company
      */
     public function getReactivationDate(): string
     {
-        return $this->parser->getData()['dataReactivare'] ?? '';
+        return $this->parser->getData()['stare_inactiv']['dataReactivare'] ?? '';
     }
 
     /**
@@ -90,7 +90,7 @@ class Company
      */
     public function getDeletionDate(): string
     {
-        return $this->parser->getData()['dataRadiere'] ?? '';
+        return $this->parser->getData()['stare_inactiv']['dataRadiere'] ?? '';
     }
 
     /**

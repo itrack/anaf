@@ -22,7 +22,7 @@ class CompanyTVA
      */
     public function hasTVA(): bool
     {
-        return $this->parser->getData()['scpTVA'];
+        return $this->parser->getData()['inregistrare_scop_Tva']['scpTVA'];
     }
 
     /**
@@ -30,7 +30,7 @@ class CompanyTVA
      */
     public function getTVAEnrollDate(): string
     {
-        return $this->parser->getData()['data_inceput_ScpTVA'];
+        return $this->parser->getData()['inregistrare_scop_Tva']['data_inceput_ScpTVA'];
     }
 
     /**
@@ -38,7 +38,7 @@ class CompanyTVA
      */
     public function getTVAEndDate(): string
     {
-        return $this->parser->getData()['data_sfarsit_ScpTVA'];
+        return $this->parser->getData()['inregistrare_scop_Tva']['data_sfarsit_ScpTVA'];
     }
 
     /**
@@ -46,7 +46,7 @@ class CompanyTVA
      */
     public function hasTVACollection(): bool
     {
-        return $this->parser->getData()['statusTvaIncasare'];
+        return $this->parser->getData()['inregistrare_RTVAI']['statusTvaIncasare'];
     }
 
     /**
@@ -54,7 +54,7 @@ class CompanyTVA
      */
     public function getTVACollectionEnrollDate(): string
     {
-        return $this->parser->getData()['dataInceputTvaInc'];
+        return $this->parser->getData()['inregistrare_RTVAI']['dataInceputTvaInc'];
     }
 
     /**
@@ -62,7 +62,7 @@ class CompanyTVA
      */
     public function getTVACollectionEndDate(): string
     {
-        return $this->parser->getData()['dataSfarsitTvaInc'];
+        return $this->parser->getData()['inregistrare_RTVAI']['dataSfarsitTvaInc'];
     }
 
     /**
@@ -70,7 +70,7 @@ class CompanyTVA
      */
     public function hasTVASplit(): bool
     {
-        return $this->parser->getData()['statusSplitTVA'];
+        return $this->parser->getData()['inregistrare_SplitTVA']['statusSplitTVA'];
     }
 
     /**
@@ -78,7 +78,7 @@ class CompanyTVA
      */
     public function getTVASplitEnrollDate(): string
     {
-        return $this->parser->getData()['dataInceputSplitTVA'];
+        return $this->parser->getData()['inregistrare_SplitTVA']['dataInceputSplitTVA'];
     }
 
     /**
@@ -86,7 +86,7 @@ class CompanyTVA
      */
     public function getTVASplitEndDate(): string
     {
-        return $this->parser->getData()['dataAnulareSplitTVA'];
+        return $this->parser->getData()['inregistrare_SplitTVA']['dataAnulareSplitTVA'];
     }
 
     /**
@@ -94,6 +94,6 @@ class CompanyTVA
      */
     public function getTVASplitIBAN(): string
     {
-        return $this->parser->getData()['iban'];
+        return $this->parser->getData()['date_generale']['iban'];
     }
 }

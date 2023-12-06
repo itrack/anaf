@@ -9,7 +9,9 @@ class ParserTest extends TestCase
     public function testAddressParser()
     {
         $parser = new Parser([
-            'adresa' => 'MUNICIPIUL BUCUREŞTI, SECTOR 1, ŞOS. BUCUREŞTI-PLOIEŞTI, NR.172-176'
+            'date_generale' => [
+                'adresa' => 'MUNICIPIUL BUCUREŞTI, SECTOR 1, ŞOS. BUCUREŞTI-PLOIEŞTI, NR.172-176'
+            ]
         ]);
 
         $this->assertEquals("Municipiul Bucureşti", $parser->getAddress()['county']);
@@ -21,7 +23,9 @@ class ParserTest extends TestCase
     public function testRegisterDateParser()
     {
         $parser = new Parser([
-            'stare_inregistrare' => 'INREGISTRAT din data 09.12.2011'
+            'date_generale' => [
+                'data_inregistrare' => '2011-12-09'
+            ]
         ]);
 
         $this->assertEquals("2011-12-09", $parser->getRegisterDate());

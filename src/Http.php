@@ -1,22 +1,33 @@
 <?php
 namespace Itrack\Anaf;
 
+use Itrack\Anaf\Exceptions\LimitExceeded;
+use Itrack\Anaf\Exceptions\RequestFailed;
+use Itrack\Anaf\Exceptions\ResponseFailed;
+
 class Http
 {
-    /** @var string API URL for v6 */
-    private const apiURL = 'https://webservicesp.anaf.ro/PlatitorTvaRest/api/v6/ws/tva';
+    /** @var string API URL for v8 */
+    private const apiURL = 'https://webservicesp.anaf.ro/PlatitorTvaRest/api/v8/ws/tva';
 
     /** @var int Limit for one time call */
     public const CIF_LIMIT = 500;
 
+    /** @var int Max. number of retries */
+    public const RETRIES_LIMIT = 5;
+
+    /** @var int Sleep time between retries (in seconds) */
+    const RETRY_SLEEP_TIME = 1;
+
     /**
      * @param array $cifs
+     * @param int $tryCount
      * @return mixed
-     * @throws Exceptions\LimitExceeded
-     * @throws Exceptions\RequestFailed
-     * @throws Exceptions\ResponseFailed
+     * @throws LimitExceeded
+     * @throws RequestFailed
+     * @throws ResponseFailed
      */
-    public static function call(array $cifs)
+    public static function call(array $cifs, int $tryCount = 0)
     {
         // Limit maxim numbers of cifs
         if(count($cifs) >= self::CIF_LIMIT) {
@@ -50,7 +61,13 @@ class Http
         $responseData = json_decode($response, true);
 
         // Check if have json because ANAF return errors in plain text
-        if(json_last_error() !== JSON_ERROR_NONE) {
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            if (self::isRequestRejectedResponse($response) && $tryCount < self::RETRIES_LIMIT) {
+                usleep(self::RETRY_SLEEP_TIME * 1e6);
+
+                return self::call($cifs, ++$tryCount);
+            }
+
             throw new Exceptions\ResponseFailed("Json parse error | Response body: {$response}");
         }
 
@@ -60,6 +77,11 @@ class Http
         }
 
         return $responseData['found'];
+    }
+
+    private static function isRequestRejectedResponse(string $response): bool
+    {
+        return strpos($response, 'Request Rejected') !== false;
     }
 
 }

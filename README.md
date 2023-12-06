@@ -128,4 +128,4 @@ Versiunea 2 nu este compatibila cu versiunea 3, daca aveti o implementare vechie
 [![Contribuitori](https://contributors-img.firebaseapp.com/image?repo=itrack/anaf)](https://github.com/itrack/anaf/graphs/contributors)
 
 # Linkuri utile
-https://webservicesp.anaf.ro/PlatitorTvaRest/api/v6/
+https://webservicesp.anaf.ro/PlatitorTvaRest/api/v8/
