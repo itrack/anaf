@@ -30,7 +30,7 @@ class CompanyTVA
      */
     public function getTVAEnrollDate(): string
     {
-        return $this->parser->getData()['inregistrare_scop_Tva']['data_inceput_ScpTVA'];
+        return $this->parser->getLatestVatPeriod()['data_inceput_ScpTVA'] ?? '';
     }
 
     /**
@@ -38,7 +38,7 @@ class CompanyTVA
      */
     public function getTVAEndDate(): string
     {
-        return $this->parser->getData()['inregistrare_scop_Tva']['data_sfarsit_ScpTVA'];
+        return $this->parser->getLatestVatPeriod()['data_sfarsit_ScpTVA'] ?? '';
     }
 
     /**

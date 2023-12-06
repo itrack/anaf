@@ -64,6 +64,20 @@ class Parser
     }
 
     /**
+     * @return array
+     */
+    public function getLatestVatPeriod(): array
+    {
+        $perioadeTva = $this->data['inregistrare_scop_Tva']['perioade_TVA'] ?? null;
+
+        if (empty($perioadeTva)) {
+            return [];
+        }
+
+        return end($perioadeTva);
+    }
+
+    /**
      * @return string
      */
     public function getPostalCode(): string

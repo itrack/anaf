@@ -35,6 +35,8 @@ class FlowTest extends TestCase
         $results = $anaf->first();
 
         $this->assertEquals("DANTE INTERNATIONAL SA", $results->getName());
+        $this->assertEquals('2002-02-01', $results->getTVA()->getTVAEnrollDate());
+        $this->assertEquals('', $results->getTVA()->getTVAEndDate());
     }
 
     public function testAddressParser()
