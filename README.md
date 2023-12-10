@@ -7,9 +7,6 @@ Librarie PHP pentru verificarea gratuita a contribuabililor care sunt inregistra
 
 -----
 
-[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://vshymanskyy.github.io/StandWithUkraine/)
-
------
 
 Date care pot fi obtinute:
   - Denumire/Adresa companie
