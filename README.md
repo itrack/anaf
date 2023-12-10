@@ -2,7 +2,7 @@
 Librarie PHP pentru verificarea gratuita a contribuabililor care sunt inregistrati conform art. 316 din Codul Fiscal
 
 [![Latest Version](http://img.shields.io/packagist/v/itrack/anaf.svg)](https://packagist.org/packages/itrack/anaf)
-[![Build Status](https://travis-ci.com/itrack/anaf.svg?branch=master)](https://app.travis-ci.com/itrack/anaf)
+[![Build Status](https://github.com/itrack/anaf/actions/workflows/tests.yml/badge.svg)](https://app.travis-ci.com/itrack/anaf)
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://vshymanskyy.github.io/StandWithUkraine/)
 
 -----

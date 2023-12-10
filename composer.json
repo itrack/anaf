@@ -1,12 +1,15 @@
 {
     "name": "itrack/anaf",
     "type": "library",
-    "version": "3.0.6",
     "description": "API ANAF pentru verificarea contribuabililor care sunt inregistrati conform art. 316 din Codul Fiscal",
-    "authors": [{
+    "license": "MIT",
+    "homepage": "https://devgeeks.ro",
+    "authors": [
+        {
             "name": "Alex Stoica",
             "email": "0x01.alex+github@gmail.com"
-        }],
+        }
+    ],
     "keywords": [
         "api anaf",
         "verificare tva",
@@ -14,9 +17,6 @@
         "webservie anaf",
         "date firma",
         "mfinante"
-    ],
-    "license": [
-        "MIT"
     ],
     "require": {
         "php": ">=7.1 || >=8.0",
@@ -41,5 +41,7 @@
         "branch-alias": {
             "dev-master": "0.1.x-dev"
         }
-    }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
