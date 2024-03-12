@@ -62,11 +62,12 @@ class Company
      */
     public function isActive(): bool
     {
-        if (empty($this->parser->getData()['stare_inactiv']['statusInactivi'] ?? null) || !is_bool($this->parser->getData()['stare_inactiv']['statusInactivi'] ?? null)) {
+        $inactive = $this->parser->getData()['stare_inactiv']['statusInactivi'] ?? null;
+        if (!isset($inactive) || !is_bool($inactive)) {
             return false;
         }
 
-        return !$this->parser->getData()['stare_inactiv']['statusInactivi'] ?? false;
+        return !$inactive;
     }
 
     /**
