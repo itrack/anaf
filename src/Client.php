@@ -64,14 +64,14 @@ class Client
     }
 
     /**
-     * @return Company
+     * @return Company|null
      * @throws Exceptions\LimitExceeded
      * @throws Exceptions\RequestFailed
      * @throws Exceptions\ResponseFailed
      */
-    public function first(): Company
+    public function first(): ?Company
     {
         $results = Http::call($this->cifs);
-        return new Company(new Parser($results[0]));
+        return $results[0] ? new Company(new Parser($results[0])) : null;
     }
 }
