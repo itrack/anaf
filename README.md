@@ -86,7 +86,7 @@ echo $company->getDeletionDate();
 echo $company->isActive();
 ```
 
-### Pentru a verifica mai multe CUI-uri in acelasi timp foloseste urmeaza exemplul de mai jos:
+### Pentru a verifica mai multe CUI-uri in acelasi timp urmeaza exemplul de mai jos:
 
 ```php
 $anaf->addCif("123456", "2019-05-20");
@@ -119,7 +119,7 @@ Poti solicita raspuns pentru maxim 500 de CUI-uri simultan cu o rata de 1 reques
 * Itrack\Anaf\Exceptions\RequestFailed - Raspunsul primit de la ANAF nu are status de succes, verifica manual raspunsul primit in exceptie.
 
 # Upgrade de la 2 la 3
-Versiunea 2 nu este compatibila cu versiunea 3, daca aveti o implementare vechie, trebuie refacuta pentru a fi compatibila.
+Versiunea 2 nu este compatibila cu versiunea 3, daca aveti o implementare veche, trebuie modificata pentru a fi compatibila.
 
 # Contribuitori
 [![Contribuitori](https://contributors-img.firebaseapp.com/image?repo=itrack/anaf)](https://github.com/itrack/anaf/graphs/contributors)
