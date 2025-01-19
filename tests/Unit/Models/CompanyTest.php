@@ -37,7 +37,10 @@ class CompanyTest extends TestCase
                     'cui' => 123456,
                     'denumire' => 'Test',
                     'telefon' => 07676000000,
-                ]
+                ],
+                'stare_inactiv' => [
+                    'statusInactivi' => false,
+                ],
             ]));
         $parset->expects($this->any())
             ->method("getPostalCode")
@@ -52,5 +55,6 @@ class CompanyTest extends TestCase
         $this->assertEquals("Şos. Bucureşti-Ploieşti", $company->getAddress()->getStreet());
         $this->assertEquals("172-176", $company->getAddress()->getStreetNumber());
         $this->assertEquals("057003", $company->getAddress()->getPostalCode());
+        $this->assertTrue($company->isActive());
     }
 }
