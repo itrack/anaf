@@ -8,7 +8,7 @@ use Itrack\Anaf\Exceptions\ResponseFailed;
 class Http
 {
     /** @var string API URL for v8 */
-    private const apiURL = 'https://webservicesp.anaf.ro/PlatitorTvaRest/api/v8/ws/tva';
+    private const apiURL = 'https://webservicesp.anaf.ro/PlatitorTvaRest/api/v9/ws/tva';
 
     /** @var int Limit for one time call */
     public const CIF_LIMIT = 500;
