@@ -53,7 +53,15 @@ class Http
         curl_close($curl);
 
         // Check http code
-        if (!isset($info['http_code']) || $info['http_code'] !== 200) {
+        if (!isset($info['http_code'])) {
+            throw new Exceptions\ResponseFailed("Missing response status code");
+        }
+        
+        if ($info['http_code'] === 400) {
+            throw new Exceptions\ResponseFailed("Bad request: {$response}");
+        }
+        
+        if ($info['http_code'] !== 200) {
             throw new Exceptions\ResponseFailed("Response status: {$info['http_code']} | Response body: {$response}");
         }
 
@@ -71,9 +79,9 @@ class Http
             throw new Exceptions\ResponseFailed("Json parse error | Response body: {$response}");
         }
 
-        // Check success stats
-        if ("SUCCESS" !== $responseData['message'] || 200 !== $responseData['cod']) {
-            throw new Exceptions\RequestFailed("Response message: {$responseData['message']} | Response body: {$response}");
+        // Check if we have the expected structure
+        if (!isset($responseData['found'])) {
+            throw new Exceptions\RequestFailed("Invalid response format - missing 'found' field | Response body: {$response}");
         }
 
         return $responseData['found'];
