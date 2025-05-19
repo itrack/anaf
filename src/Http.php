@@ -7,11 +7,11 @@ use Itrack\Anaf\Exceptions\ResponseFailed;
 
 class Http
 {
-    /** @var string API URL for v8 */
-    private const apiURL = 'https://webservicesp.anaf.ro/PlatitorTvaRest/api/v8/ws/tva';
+    /** @var string API URL for v9 */
+    private const apiURL = 'https://webservicesp.anaf.ro/api/PlatitorTvaRest/v9/tva';
 
     /** @var int Limit for one time call */
-    public const CIF_LIMIT = 500;
+    public const CIF_LIMIT = 100;
 
     /** @var int Max. number of retries */
     public const RETRIES_LIMIT = 5;
@@ -31,7 +31,7 @@ class Http
     {
         // Limit maxim numbers of cifs
         if(count($cifs) >= self::CIF_LIMIT) {
-            throw new Exceptions\LimitExceeded('You can check one time up to 500 cifs.');
+            throw new Exceptions\LimitExceeded('You can check one time up to 100 cifs.');
         }
 
         // Make request
