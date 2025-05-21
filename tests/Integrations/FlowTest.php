@@ -45,9 +45,9 @@ class FlowTest extends TestCase
         $anaf->addCif("RO14399840");
         $results = $anaf->first();
 
-        $this->assertEquals("Ilfov", $results->getAddress()->getCounty());
-        $this->assertEquals("Oraş Voluntari", $results->getAddress()->getCity());
-        $this->assertEquals("Şos. Bucureşti Nord", $results->getAddress()->getStreet());
-        $this->assertEquals("15-23", $results->getAddress()->getStreetNumber());
+        $this->assertEquals("Municipiul Bucureşti", $results->getAddress()->getCounty());
+        $this->assertEquals("Sector 2", $results->getAddress()->getCity());
+        $this->assertEquals("Gara Herăstrău", $results->getAddress()->getStreet());
+        $this->assertEquals("6", $results->getAddress()->getStreetNumber());
     }
 }

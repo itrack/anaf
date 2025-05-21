@@ -104,7 +104,7 @@ $raspuns = $anaf->get();
 ```
 
 # Limite
-Poti solicita raspuns pentru maxim 500 de CUI-uri simultan cu o rata de 1 request / secunda. 
+Poti solicita raspuns pentru maxim 100 de CUI-uri simultan cu o rata de 1 request / secunda. 
 
 # Requirements
 * PHP >= 7.1 | >= 8
@@ -114,7 +114,7 @@ Poti solicita raspuns pentru maxim 500 de CUI-uri simultan cu o rata de 1 reques
 
 # Exceptii:
 
-* Itrack\Anaf\Exceptions\LimitExceeded - Ai depasit limita de 500 de CUI-uri / request;
+* Itrack\Anaf\Exceptions\LimitExceeded - Ai depasit limita de 100 de CUI-uri / request;
 * Itrack\Anaf\Exceptions\ResponseFailed - Raspunsul primit de la ANAF nu este in format JSON, exceptia returneaza body-ul raspunsului pentru a fi verificat manual;
 * Itrack\Anaf\Exceptions\RequestFailed - Raspunsul primit de la ANAF nu are status de succes, verifica manual raspunsul primit in exceptie.
 
@@ -125,4 +125,4 @@ Versiunea 2 nu este compatibila cu versiunea 3, daca aveti o implementare veche,
 [![Contribuitori](https://contributors-img.firebaseapp.com/image?repo=itrack/anaf)](https://github.com/itrack/anaf/graphs/contributors)
 
 # Linkuri utile
-https://webservicesp.anaf.ro/PlatitorTvaRest/api/v8/
+https://static.anaf.ro/static/10/Anaf/Informatii_R/Servicii_web/doc_WS_V9.txt

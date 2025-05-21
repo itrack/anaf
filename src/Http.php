@@ -7,11 +7,11 @@ use Itrack\Anaf\Exceptions\ResponseFailed;
 
 class Http
 {
-    /** @var string API URL for v8 */
-    private const apiURL = 'https://webservicesp.anaf.ro/PlatitorTvaRest/api/v8/ws/tva';
+    /** @var string API URL for v9 */
+    private const apiURL = 'https://webservicesp.anaf.ro/api/PlatitorTvaRest/v9/tva';
 
     /** @var int Limit for one time call */
-    public const CIF_LIMIT = 500;
+    public const CIF_LIMIT = 100;
 
     /** @var int Max. number of retries */
     public const RETRIES_LIMIT = 5;
@@ -31,7 +31,7 @@ class Http
     {
         // Limit maxim numbers of cifs
         if(count($cifs) >= self::CIF_LIMIT) {
-            throw new Exceptions\LimitExceeded('You can check one time up to 500 cifs.');
+            throw new Exceptions\LimitExceeded('You can check one time up to 100 cifs.');
         }
 
         // Make request
@@ -53,7 +53,15 @@ class Http
         curl_close($curl);
 
         // Check http code
-        if (!isset($info['http_code']) || $info['http_code'] !== 200) {
+        if (!isset($info['http_code'])) {
+            throw new Exceptions\ResponseFailed("Missing response status code");
+        }
+        
+        if ($info['http_code'] === 400) {
+            throw new Exceptions\ResponseFailed("Bad request: {$response}");
+        }
+        
+        if ($info['http_code'] !== 200) {
             throw new Exceptions\ResponseFailed("Response status: {$info['http_code']} | Response body: {$response}");
         }
 
@@ -71,9 +79,9 @@ class Http
             throw new Exceptions\ResponseFailed("Json parse error | Response body: {$response}");
         }
 
-        // Check success stats
-        if ("SUCCESS" !== $responseData['message'] || 200 !== $responseData['cod']) {
-            throw new Exceptions\RequestFailed("Response message: {$responseData['message']} | Response body: {$response}");
+        // Check if we have the expected structure
+        if (!isset($responseData['found'])) {
+            throw new Exceptions\RequestFailed("Invalid response format - missing 'found' field | Response body: {$response}");
         }
 
         return $responseData['found'];
