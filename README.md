@@ -3,7 +3,6 @@ Librarie PHP pentru verificarea gratuita a contribuabililor care sunt inregistra
 
 [![Latest Version](http://img.shields.io/packagist/v/itrack/anaf.svg)](https://packagist.org/packages/itrack/anaf)
 [![Build Status](https://github.com/itrack/anaf/actions/workflows/tests.yml/badge.svg)](https://app.travis-ci.com/itrack/anaf)
-[![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://vshymanskyy.github.io/StandWithUkraine/)
 
 -----
 
@@ -11,14 +10,21 @@ Librarie PHP pentru verificarea gratuita a contribuabililor care sunt inregistra
 Date care pot fi obtinute:
   - Denumire/Adresa companie
   - Numar Registrul Comertului
-  - Numar de telefon
-  - Platitor/Neplatitor TVA
-  - Platitor TVA la incasare
-  - Platitor Split TVA pana la 1 februarie 2020 (**OUG 23/2017 privind plata defalcată a TVA a fost abrogata incepand cu 1 februarie 2020**)
+  - Numar de telefon / Fax
+  - Cod CAEN
+  - Act autorizare
+  - Stare inregistrare / Data inregistrare
+  - Status RO e-Factura
+  - Organ fiscal competent
+  - Forma de proprietate / Forma de organizare / Forma juridica
+  - Adresa sediu social (structurata: strada, numar, localitate, judet, cod postal, tara, detalii)
+  - Adresa domiciliu fiscal (structurata: strada, numar, localitate, judet, cod postal, tara, detalii)
+  - Platitor/Neplatitor TVA (cu data anulare si temei legal)
+  - Platitor TVA la incasare (cu data actualizare, publicare, tip actualizare)
+  - Platitor Split TVA (**OUG 23/2017 privind plata defalcată a TVA a fost abrogata incepand cu 1 februarie 2020**)
   - IBAN Split TVA
-  - Data inregistrare TVA
   - Status Societate (Activa/Inactiva)
-  - Data radiere
+  - Data inactivare / Data reactivare / Data publicare / Data radiere
   
 :heart: Daca iti este de folos te rog sa oferi o stea :star:
   
@@ -53,12 +59,50 @@ $dataVerificare = "2019-05-20";
 $anaf->addCif($cif, $dataVerificare);
 $company = $anaf->first();
 
-// Metode disponibile
+// Date generale
 echo $company->getName();
 echo $company->getCIF();
+echo $company->getSearchDate();
 echo $company->getRegCom();
 echo $company->getPhone();
+echo $company->getFax();
+echo $company->getPostalCode();
+echo $company->getAuthorizationAct();
+echo $company->getRegistrationState();
+echo $company->getRegistrationDate();
+echo $company->getCAENCode();
+echo $company->getIBAN();
+echo $company->hasEFactura();
+echo $company->getCompetentFiscalBody();
+echo $company->getOwnershipForm();
+echo $company->getOrganizationForm();
+echo $company->getLegalForm();
 
+// Adresa sediu social (structurata)
+echo $company->getHeadquartersAddress()->getStreet();
+echo $company->getHeadquartersAddress()->getStreetNumber();
+echo $company->getHeadquartersAddress()->getCity();
+echo $company->getHeadquartersAddress()->getCityCode();
+echo $company->getHeadquartersAddress()->getCounty();
+echo $company->getHeadquartersAddress()->getCountyCode();
+echo $company->getHeadquartersAddress()->getCountyAutoCode();
+echo $company->getHeadquartersAddress()->getCountry();
+echo $company->getHeadquartersAddress()->getAddressDetails();
+echo $company->getHeadquartersAddress()->getPostalCode();
+
+// Adresa domiciliu fiscal (structurata)
+echo $company->getFiscalAddress()->getStreet();
+echo $company->getFiscalAddress()->getStreetNumber();
+echo $company->getFiscalAddress()->getCity();
+echo $company->getFiscalAddress()->getCityCode();
+echo $company->getFiscalAddress()->getCounty();
+echo $company->getFiscalAddress()->getCountyCode();
+echo $company->getFiscalAddress()->getCountyAutoCode();
+echo $company->getFiscalAddress()->getCountry();
+echo $company->getFiscalAddress()->getAddressDetails();
+echo $company->getFiscalAddress()->getPostalCode();
+
+// Adresa (backward compatibility api - depreciat)
 echo $company->getFullAddress();
 echo $company->getAddress()->getCity();
 echo $company->getAddress()->getCounty();
@@ -67,23 +111,33 @@ echo $company->getAddress()->getStreetNumber();
 echo $company->getAddress()->getPostalCode();
 echo $company->getAddress()->getOthers();
 
+// TVA
 echo $company->getTVA()->hasTVA();
 echo $company->getTVA()->getTVAEnrollDate();
 echo $company->getTVA()->getTVAEndDate();
+echo $company->getTVA()->getTVACancellationDate();
+echo $company->getTVA()->getTVACancellationMessage();
 
+// TVA la incasare
 echo $company->getTVA()->hasTVACollection();
 echo $company->getTVA()->getTVACollectionEnrollDate();
 echo $company->getTVA()->getTVACollectionEndDate();
+echo $company->getTVA()->getTVACollectionUpdateDate();
+echo $company->getTVA()->getTVACollectionPublishDate();
+echo $company->getTVA()->getTVACollectionUpdateType();
 
+// Split TVA
 echo $company->getTVA()->hasTVASplit();
 echo $company->getTVA()->getTVASplitEnrollDate();
 echo $company->getTVA()->getTVASplitEndDate();
 echo $company->getTVA()->getTVASplitIBAN();
 
-echo $company->getReactivationDate();
-echo $company->getInactivationDate();
-echo $company->getDeletionDate();
+// Stare inactiv
 echo $company->isActive();
+echo $company->getInactivationDate();
+echo $company->getReactivationDate();
+echo $company->getPublishDate();
+echo $company->getDeletionDate();
 ```
 
 ### Pentru a verifica mai multe CUI-uri in acelasi timp urmeaza exemplul de mai jos:

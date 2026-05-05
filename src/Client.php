@@ -5,8 +5,8 @@ use Itrack\Anaf\Models\Company;
 use stdClass;
 
 /**
- * Implementare API ANAF V8
- * https://webservicesp.anaf.ro/PlatitorTvaRest/api/v8/
+ * Implementare API ANAF V9
+ * https://static.anaf.ro/static/10/Anaf/Informatii_R/Servicii_web/doc_WS_V9.txt
  * @package Itrack\Anaf
  */
 class Client
@@ -21,7 +21,7 @@ class Client
      * @param string|null $date
      * @return $this
      */
-    public function addCif($cifs, string $date = null): Client
+    public function addCif($cifs, ?string $date = null): Client
     {
         // If not have set date return today
         if(is_null($date)) {

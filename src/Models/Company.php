@@ -28,6 +28,14 @@ class Company
     /**
      * @return string
      */
+    public function getSearchDate(): string
+    {
+        return $this->parser->getData()['date_generale']['data'] ?? '';
+    }
+
+    /**
+     * @return string
+     */
     public function getRegCom(): string
     {
         return $this->parser->getData()['date_generale']['nrRegCom'] ?? '';
@@ -52,9 +60,105 @@ class Company
     /**
      * @return string
      */
+    public function getFax(): string
+    {
+        return $this->parser->getData()['date_generale']['fax'] ?? '';
+    }
+
+    /**
+     * @return string
+     */
     public function getFullAddress(): string
     {
         return $this->parser->getData()['date_generale']['adresa'] ?? '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getPostalCode(): string
+    {
+        return $this->parser->getData()['date_generale']['codPostal'] ?? '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorizationAct(): string
+    {
+        return $this->parser->getData()['date_generale']['act'] ?? '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegistrationState(): string
+    {
+        return $this->parser->getData()['date_generale']['stare_inregistrare'] ?? '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegistrationDate(): string
+    {
+        return $this->parser->getData()['date_generale']['data_inregistrare'] ?? '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getCAENCode(): string
+    {
+        return $this->parser->getData()['date_generale']['cod_CAEN'] ?? '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getIBAN(): string
+    {
+        return $this->parser->getData()['date_generale']['iban'] ?? '';
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasEFactura(): bool
+    {
+        return $this->parser->getData()['date_generale']['statusRO_e_Factura'] ?? false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCompetentFiscalBody(): string
+    {
+        return $this->parser->getData()['date_generale']['organFiscalCompetent'] ?? '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getOwnershipForm(): string
+    {
+        return $this->parser->getData()['date_generale']['forma_de_proprietate'] ?? '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getOrganizationForm(): string
+    {
+        return $this->parser->getData()['date_generale']['forma_organizare'] ?? '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getLegalForm(): string
+    {
+        return $this->parser->getData()['date_generale']['forma_juridica'] ?? '';
     }
 
     /**
@@ -89,6 +193,14 @@ class Company
     /**
      * @return string
      */
+    public function getPublishDate(): string
+    {
+        return $this->parser->getData()['stare_inactiv']['dataPublicare'] ?? '';
+    }
+
+    /**
+     * @return string
+     */
     public function getDeletionDate(): string
     {
         return $this->parser->getData()['stare_inactiv']['dataRadiere'] ?? '';
@@ -108,5 +220,21 @@ class Company
     public function getAddress(): CompanyAddress
     {
         return new CompanyAddress($this->parser);
+    }
+
+    /**
+     * @return CompanyHeadquartersAddress
+     */
+    public function getHeadquartersAddress(): CompanyHeadquartersAddress
+    {
+        return new CompanyHeadquartersAddress($this->parser);
+    }
+
+    /**
+     * @return CompanyFiscalAddress
+     */
+    public function getFiscalAddress(): CompanyFiscalAddress
+    {
+        return new CompanyFiscalAddress($this->parser);
     }
 }
